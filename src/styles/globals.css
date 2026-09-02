@@ -1,0 +1,183 @@
+/* ============================================
+   GLOBAL STYLES & DESIGN TOKENS
+   Portfolio — Parth Mule
+   ============================================ */
+
+/* --- Design Tokens (CSS Custom Properties) --- */
+:root {
+  /* Background — light clean palette [FFFFFF] */
+  --color-bg-primary: #FFFFFF;
+  --color-bg-secondary: #FAFAFA;
+  --color-bg-elevated: #FFFFFF;
+  --color-bg-surface: #F2F2F2;
+
+  /* Text — deep pitch black [000000] & precise hierarchy */
+  --color-text-primary: #000000;
+  --color-text-secondary: #4A4A4A;
+  --color-text-muted: #767676;
+
+  /* Accent — rich burgundy / crimson red [6D001A] */
+  --color-accent: #6D001A;
+  --color-accent-light: #9E0027;
+  --color-accent-dim: rgba(109, 0, 26, 0.08);
+  --color-accent-glow: rgba(109, 0, 26, 0.18);
+
+  /* Borders & Shadows */
+  --color-border: rgba(0, 0, 0, 0.08);
+  --color-border-hover: rgba(109, 0, 26, 0.35);
+  --shadow-2xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+
+  /* Spacing scale */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  --space-4xl: 6rem;
+  --space-5xl: 8rem;
+  --space-6xl: 12rem;
+
+  /* Typography scale — next/font sets --font-display and --font-mono on <html> */
+  --font-body: 'Mongoose', 'Futura', var(--font-display), system-ui, -apple-system, sans-serif;
+
+  --text-xs: 0.85rem;
+  --text-sm: 1rem;
+  --text-base: 1.125rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.25rem;
+  --text-4xl: 3rem;
+  --text-5xl: 4rem;
+  --text-6xl: 5rem;
+  --text-hero: clamp(3.5rem, 9vw, 8rem);
+
+  /* Font weights */
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-extrabold: 800;
+
+  /* Line heights */
+  --leading-tight: 1.1;
+  --leading-snug: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.7;
+
+  /* Letter spacing */
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.05em;
+  --tracking-wider: 0.1em;
+  --tracking-widest: 0.2em;
+
+  /* Easing curves (Emil Kowalski Design Engineering skill rules) */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --duration-fast: 125ms;
+  --duration-normal: 200ms;
+  --duration-slow: 300ms;
+
+  /* Layout */
+  --nav-height: 4.5rem;
+  --container-max: 1200px;
+  --container-padding: clamp(1.5rem, 4vw, 3rem);
+
+  /* Z-index */
+  --z-nav: 100;
+  --z-overlay: 200;
+}
+
+/* --- Reset & Base --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--weight-normal);
+  line-height: var(--leading-normal);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+/* Buttons must feel responsive to press (scale feedback) */
+button:active {
+  transform: scale(0.97);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+/* --- Focus visible states --- */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* --- Selection --- */
+::selection {
+  background: var(--color-accent-dim);
+  color: var(--color-accent);
+}
+
+/* --- Scrollbar styling --- */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}

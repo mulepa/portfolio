@@ -1,0 +1,305 @@
+/* ============================================
+   HERO SECTION STYLES
+   ============================================ */
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--nav-height) var(--container-padding) var(--space-3xl);
+  overflow: hidden;
+}
+
+/* --- Ambient background glow --- */
+.ambientGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1000px;
+  height: 1000px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(109, 0, 26, 0.05) 0%,
+    rgba(109, 0, 26, 0.015) 45%,
+    transparent 75%
+  );
+  pointer-events: none;
+  animation: ambientPulse 8s ease-in-out infinite;
+}
+
+@keyframes ambientPulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: translate(-50%, -50%) scale(1.06);
+  }
+}
+
+/* --- Subtle grid overlay --- */
+.gridOverlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  mask-image: radial-gradient(
+    ellipse 60% 60% at 50% 50%,
+    black 0%,
+    transparent 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 60% 60% at 50% 50%,
+    black 0%,
+    transparent 100%
+  );
+}
+
+/* --- Content --- */
+.content {
+  text-align: center;
+  max-width: 860px;
+  z-index: 1;
+  animation: fadeInUp 250ms var(--ease-out) both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .content {
+    animation: none;
+  }
+
+  .ambientGlow {
+    animation: none;
+    opacity: 0.5;
+  }
+}
+
+/* --- Name (3D Stack) --- */
+.name {
+  margin-bottom: var(--space-xl);
+  display: flex;
+  justify-content: center;
+}
+
+.stack {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  outline: none;
+  overflow: visible;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.stack:active {
+  transform: scale(0.97);
+}
+
+.stackLayer {
+  font-family: var(--font-body);
+  font-weight: var(--weight-extrabold);
+  font-size: var(--text-hero);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  white-space: nowrap;
+  transition: transform var(--duration-normal) var(--ease-out),
+              opacity var(--duration-normal) var(--ease-out);
+}
+
+.stackLayer.l0 {
+  position: relative;
+  z-index: 3;
+  color: var(--color-text-primary);
+  display: block;
+}
+
+.stackLayer.ghost1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(0, 0, 0, 0.15);
+  opacity: 0.15;
+  pointer-events: none;
+  transform: translate(8px, 8px);
+}
+
+.stackLayer.ghost2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  color: var(--color-accent);
+  opacity: 0.85;
+  pointer-events: none;
+  transform: translate(4px, 4px);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .stack:hover .l0 {
+    transform: translate(-2px, -2px);
+  }
+
+  .stack:hover .ghost1 {
+    transform: translate(12px, 12px);
+    opacity: 0.22;
+  }
+
+  .stack:hover .ghost2 {
+    transform: translate(6px, 6px);
+    opacity: 1;
+  }
+}
+
+/* --- Identity line --- */
+.identityLine {
+  font-family: var(--font-mono);
+  font-size: clamp(1.1rem, 2.8vw, 1.5rem);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-2xl);
+  min-height: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.identityFixed {
+  color: var(--color-text-secondary);
+}
+
+.identityRole {
+  color: var(--color-accent);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  /* Reserve space for the longest role to prevent layout shift */
+  min-width: 14ch;
+  text-align: left;
+}
+
+/* --- Cursor --- */
+.cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.2em;
+  background-color: var(--color-accent);
+  margin-left: 1px;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.cursorBlink {
+  animation: blink 0.8s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor {
+    animation: none;
+    opacity: 1;
+  }
+
+  .cursorBlink {
+    animation: none;
+  }
+}
+
+/* --- Statement --- */
+.statement {
+  font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+  font-weight: var(--weight-normal);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-secondary);
+  max-width: 560px;
+  margin: 0 auto;
+  letter-spacing: 0.01em;
+}
+
+/* --- Scroll Cue --- */
+.scrollCue {
+  position: absolute;
+  bottom: var(--space-3xl);
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--color-text-muted);
+  transition: color var(--duration-normal) var(--ease-out),
+              transform var(--duration-normal) var(--ease-out);
+  animation: scrollBounce 2.5s var(--ease-in-out) infinite;
+  z-index: 1;
+  padding: var(--space-sm);
+}
+
+.scrollCue:hover {
+  color: var(--color-text-secondary);
+}
+
+@keyframes scrollBounce {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrollCue {
+    animation: none;
+  }
+}
+
+/* --- Responsive adjustments --- */
+@media (max-width: 768px) {
+  .hero {
+    padding-bottom: var(--space-4xl);
+  }
+
+  .identityLine {
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .identityRole {
+    min-width: unset;
+    justify-content: center;
+  }
+
+  .name {
+    margin-bottom: var(--space-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .scrollCue {
+    bottom: var(--space-xl);
+  }
+}

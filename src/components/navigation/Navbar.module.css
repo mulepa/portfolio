@@ -1,0 +1,113 @@
+/* ============================================
+   NAVBAR STYLES
+   ============================================ */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-nav);
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  transition: background-color var(--duration-normal) var(--ease-out),
+              border-color var(--duration-normal) var(--ease-out),
+              backdrop-filter var(--duration-normal) var(--ease-out);
+  border-bottom: 1px solid transparent;
+}
+
+.navbar.scrolled {
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom-color: var(--color-border);
+}
+
+.container {
+  width: 100%;
+  max-width: 100%;
+  padding: 0 var(--container-padding);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wider);
+  color: var(--color-text-primary);
+  transition: opacity var(--duration-fast) var(--ease-out),
+              transform var(--duration-fast) var(--ease-out);
+  user-select: none;
+}
+
+.logo:active {
+  transform: scale(0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .logo:hover {
+    opacity: 0.75;
+  }
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+}
+
+.navLink {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wider);
+  color: var(--color-text-secondary);
+  transition: color var(--duration-fast) var(--ease-out),
+              transform var(--duration-fast) var(--ease-out);
+  position: relative;
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-accent);
+  transition: width var(--duration-normal) var(--ease-out);
+}
+
+.navLink:active {
+  transform: scale(0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .navLink:hover {
+    color: var(--color-text-primary);
+  }
+
+  .navLink:hover::after {
+    width: 100%;
+  }
+}
+
+/* --- Responsive --- */
+@media (max-width: 640px) {
+  .logo {
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-wide);
+  }
+
+  .links {
+    gap: var(--space-lg);
+  }
+
+  .navLink {
+    font-size: var(--text-xs);
+  }
+}
